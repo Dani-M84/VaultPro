@@ -15,14 +15,20 @@ jobs:
       - name: Install buildozer
         run: |
           pip install buildozer==1.5.0 cython==0.29.36
-      - name: Build
+      - name: Build A36 - NO TRUNCA
         run: |
-          yes | buildozer -v android debug
-      - name: List bin
+          buildozer android debug > full_log.txt 2>&1 || true
+          echo "=== ULTIMAS 300 LINEAS DEL ERROR REAL ==="
+          tail -n 300 full_log.txt
+      - name: Upload full log
         if: always()
-        run: ls -R bin || echo "no bin"
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-log
+          path: full_log.txt
+      - name: Upload APK
         if: always()
+        uses: actions/upload-artifact@v4
         with:
           name: VaultPro-A36-APK
           path: bin/
