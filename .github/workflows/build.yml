@@ -12,10 +12,15 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - name: Install Rust for cryptography
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
       - run: |
           sudo apt update
           sudo apt install -y zip unzip python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev cmake libffi-dev libssl-dev
           pip install buildozer==1.5.0 cython==0.29.36
+          rustc --version
       - run: |
           yes | buildozer android debug
       - uses: actions/upload-artifact@v4
