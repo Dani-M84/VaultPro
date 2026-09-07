@@ -6,7 +6,7 @@ package.domain = com.danim.vaultpro
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,json
 version = 3.0
-requirements = python3,kivy==2.3.0,pyjnius,cryptography,pyotp,android
+requirements = python3,kivy==2.3.0,pyjnius,cryptography==41.0.7,pyotp,android
 orientation = portrait
 fullscreen = 0
 android.permissions = INTERNET
